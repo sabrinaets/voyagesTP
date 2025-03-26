@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.sg.voyagestp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.sg.voyagestp"
@@ -38,6 +38,8 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     testImplementation(libs.junit)
+    implementation(libs.okhttp)
+    implementation (libs.jackson.databind)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }

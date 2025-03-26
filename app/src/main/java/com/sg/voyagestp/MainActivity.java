@@ -43,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //lancer le thread qui va verifier le contenu du json
+                String email = etCourriel.getText().toString();
+                String password = etPassword.getText().toString();
+
+                threadJSON thread = new threadJSON(email, password);
+                thread.start();
             }
         });
 

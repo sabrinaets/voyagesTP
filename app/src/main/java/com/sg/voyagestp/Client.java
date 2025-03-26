@@ -1,25 +1,25 @@
 package com.sg.voyagestp;
 
-public class Utilisateur {
+public class Client {
     private String id;      //le serveur met automatiquement un id en string
     private String nom;
     private String prenom;
 
     private int age;
-    private String courriel;
+    private String email;
     private String telephone;
 
     private String adresse;
-    private String password;
+    private String mdp;
 
-    public Utilisateur(String nom, String prenom, int age, String courriel, String telephone, String adresse, String password) {
+    public Client(String nom, String prenom, int age, String courriel, String telephone, String adresse, String password) {
         this.nom = nom;
         this.prenom = prenom;
         this.age = age;
-        this.courriel = courriel;
+        this.email = courriel;
         this.telephone = telephone;
         this.adresse = adresse;
-        this.password = password;
+        this.mdp = password;
     }
 
     public String getId() {
@@ -54,12 +54,12 @@ public class Utilisateur {
         this.age = age;
     }
 
-    public String getCourriel() {
-        return courriel;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCourriel(String courriel) {
-        this.courriel = courriel;
+    public void setEmail(String courriel) {
+        this.email = courriel;
     }
 
     public String getTelephone() {
@@ -79,10 +79,10 @@ public class Utilisateur {
     }
 
     public String getPassword() {
-        return password;
+        return mdp;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.mdp = password;
     }
 }
