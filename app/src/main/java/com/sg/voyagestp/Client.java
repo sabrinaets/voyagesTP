@@ -1,5 +1,7 @@
 package com.sg.voyagestp;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Client {
     private String id;      //le serveur met automatiquement un id en string
     private String nom;
@@ -10,17 +12,21 @@ public class Client {
     private String telephone;
 
     private String adresse;
+    @JsonProperty("mdp")  // Lier la propriété "mdp" dans JSON au champ "mdp" dans la classe Client
     private String mdp;
 
-    public Client(String nom, String prenom, int age, String courriel, String telephone, String adresse, String password) {
+    public Client(String nom, String prenom, int age, String courriel, String telephone, String adresse, String mdp) {
         this.nom = nom;
         this.prenom = prenom;
         this.age = age;
         this.email = courriel;
         this.telephone = telephone;
         this.adresse = adresse;
-        this.mdp = password;
+
+        this.mdp = mdp;
     }
+
+    public Client(){}
 
     public String getId() {
         return id;

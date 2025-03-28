@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 String email = etCourriel.getText().toString();
                 String password = etPassword.getText().toString();
 
-                threadJSON thread = new threadJSON(email, password);
+                threadJSON thread = new threadJSON(MainActivity.this,email, password);
                 thread.start();
             }
         });
@@ -60,3 +60,5 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+
+//=

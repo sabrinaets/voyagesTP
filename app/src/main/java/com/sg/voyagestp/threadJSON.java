@@ -1,6 +1,10 @@
 package com.sg.voyagestp;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -10,52 +14,68 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 
-public class threadJSON extends Thread{
+public class threadJSON extends Thread {
 
     private static final String TAG = "messagesThread";
-    final String URL_POINT_ENTREE = "http://10.0.2.2:3000";
+    final String URL_POINT_ENTREE = "http://192.168.0.101:3000";
     private String email;
     private String password;
 
-    public threadJSON(String email, String password) {
+    Context contexte;
+
+    public threadJSON(Context contexte, String email, String password) {
         this.email = email;
         this.password = password;
+        this.contexte = contexte;
+
     }
 
     @Override
     public void run() {
+
+        boolean utilisateurTrouve = verifierUtilisateur(this.email,this.password);
+        if (this.contexte instanceof Activity){
+            ((Activity) this.contexte).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (utilisateurTrouve){
+                        Intent intent = new Intent(contexte, AccueilActivity.class);
+                        contexte.startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(contexte, "Utilisateur introuvable", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+    }
+
+    public boolean verifierUtilisateur(String email, String mdp) {
         OkHttpClient client = new OkHttpClient();
-        Request requete = new Request.Builder().url(URL_POINT_ENTREE+"/clients").build();
+        Request requete = new Request.Builder().url(URL_POINT_ENTREE + "/clients").build();
 
 
-        Response response =null;
+        Response response = null;
         try {
             response = client.newCall(requete).execute();
             ResponseBody responseBody = response.body();
             String jsonData = responseBody.string();
-            Log.i(TAG,"Clients: "+jsonData);
+            Log.i(TAG, "Clients: " + jsonData);
 
             ObjectMapper mapper = new ObjectMapper();
-            Client[] clients = mapper.readValue(jsonData,Client[].class);
-            boolean trouve =false;
-            for (Client c :clients){
-                if (c.getEmail().equals(this.email) && c.getPassword().equals(this.password)){
-                    trouve=true;
-                    break;
+            Client[] clients = mapper.readValue(jsonData, Client[].class);
+            boolean trouve = false;
+            for (Client c : clients) {
+                if (c.getEmail().equals(this.email) && c.getPassword().equals(this.password)) {
+                    return true;
                 }
             }
-
-            if (trouve){
-                //traitement pour aller a la page d'accueil
-            }
-            else{
-                //message utilisateur introuvable
-            }
-        }
-        catch(Exception e){
-           Log.d(TAG,e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
             throw new RuntimeException();
-        }
 
+        }
+        return false;
     }
 }
