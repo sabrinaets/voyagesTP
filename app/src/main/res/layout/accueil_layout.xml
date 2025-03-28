@@ -1,10 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".AccueilActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_margin="10dp"
+        android:text="Quel type de voyage recherchez-vous?" />
+
+    <Spinner
+        android:id="@+id/spinDestination"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content" />
+
+
+    <Spinner
+        android:id="@+id/spinTypeVoyage"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content" />
+
+
+    <Spinner
+        android:id="@+id/spinDestination2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp" />
+
+    <EditText
+        android:id="@+id/eTDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="Date"
+        android:layout_margin="10dp"
+        android:inputType="date" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="match_parent" />
+</LinearLayout>

@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Se connecter"
+        android:backgroundTint="@color/boutons"
         app:cornerRadius="0dp"
 
         />
@@ -47,6 +48,7 @@
         android:id="@+id/btnInscription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/boutons"
         android:layout_marginTop="30dp"
         android:text="Vous n'avez pas encore de compte?"
         app:cornerRadius="0dp"
