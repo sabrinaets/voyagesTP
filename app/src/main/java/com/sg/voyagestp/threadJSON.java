@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sg.voyagestp.modeles.Client;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -16,7 +17,7 @@ import okhttp3.ResponseBody;
 
 public class threadJSON extends Thread {
 
-    private static final String TAG = "messagesThread";
+    private static final String TAG = "connexionThread";
     final String URL_POINT_ENTREE = "http://192.168.0.101:3000";
     private String email;
     private String password;
@@ -67,7 +68,7 @@ public class threadJSON extends Thread {
             Client[] clients = mapper.readValue(jsonData, Client[].class);
             boolean trouve = false;
             for (Client c : clients) {
-                if (c.getEmail().equals(this.email) && c.getPassword().equals(this.password)) {
+                if (c.getEmail().equals(email) && c.getPassword().equals(mdp)) {
                     return true;
                 }
             }

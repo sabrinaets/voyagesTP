@@ -1,8 +1,10 @@
-package com.sg.voyagestp;
+package com.sg.voyagestp.modeles;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Client {
+import java.io.Serializable;
+
+public class Client implements Serializable {
     private String id;      //le serveur met automatiquement un id en string
     private String nom;
     private String prenom;

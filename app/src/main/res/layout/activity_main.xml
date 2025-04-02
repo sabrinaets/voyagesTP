@@ -21,8 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Adresse courriel"
         android:inputType="text"
-        android:text="Adresse courriel"
         android:layout_marginTop="70dp"/>
 
     <EditText
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:text="Mot de passe"
+        android:hint="Mot de passe"
         android:inputType="textPassword"
         android:layout_marginTop="30dp"/>
 
