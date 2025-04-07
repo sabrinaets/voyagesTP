@@ -15,7 +15,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 
-public class threadJSON extends Thread {
+public class threadJsonConnexion extends Thread {
 
     private static final String TAG = "connexionThread";
     final String URL_POINT_ENTREE = "http://192.168.0.101:3000";
@@ -24,7 +24,7 @@ public class threadJSON extends Thread {
 
     Context contexte;
 
-    public threadJSON(Context contexte, String email, String password) {
+    public threadJsonConnexion(Context contexte, String email, String password) {
         this.email = email;
         this.password = password;
         this.contexte = contexte;

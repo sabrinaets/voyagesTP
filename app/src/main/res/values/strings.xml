@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">voyagesTP</string>
+    <string-array name="destinations">
+        <item>Montreal, Quebec</item>
+        <item>Gaspesie, Quebec</item>
+        <item>Quebec, Quebec</item>
+        <item>Laurentides, Quebec</item>
+        <item>Banff, Alberta</item>
+        <item>Montreal, Quebec</item>
+        <item>Vancouver, Colombie-Britannique</item>
+        <item>Niagara Falls, Ontario</item>
+        <item>Ottawa, Ontario</item>
+        <item>Montreal, Quebec</item>
+    </string-array>
+    <string-array name="types">
+        <item>Culturel</item>
+        <item>Aventure</item>
+        <item>Bien-etre</item>
+        <item>Nature</item>
+    </string-array>
+    <string-array name="budgets">
+        <item>300$</item>
+        <item>600$</item>
+        <item>1000$</item>
+    </string-array>
 </resources>
