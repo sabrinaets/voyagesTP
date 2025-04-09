@@ -1,5 +1,6 @@
 package com.sg.voyagestp;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -165,6 +166,16 @@ public class AccueilActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
 
+
+        //Détails voyage
+        listeVoyages.setOnItemClickListener((adapterView, view, position, id) -> {
+            Voyage voyage = adapteur.getItem(position);
+            if (voyage!=null){
+                Intent iVoirVoyage = new Intent(AccueilActivity.this,detailsVoyage.class);
+                iVoirVoyage.putExtra("leVoyage",voyage);
+                startActivity(iVoirVoyage);
+            }
+        });
     }
 
     @Override
