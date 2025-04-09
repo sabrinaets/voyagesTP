@@ -3,7 +3,11 @@ package com.sg.voyagestp;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -36,11 +40,11 @@ public class AccueilActivity extends AppCompatActivity {
     Spinner spinType;
     EditText eTDate;
 
-    String destination;
-    double budget;
-    String typeVoyage;
+    String destination = "";
+    String budget="";
+    String typeVoyage="";
 
-    Date dateVoyage;
+    String dateVoyage="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,19 +85,12 @@ public class AccueilActivity extends AppCompatActivity {
             destination = spinDestination.getSelectedItem().toString();
         }
         if (spinBudget.getSelectedItem()!=null) {
-            budget = Double.parseDouble(spinBudget.getSelectedItem().toString());
+            budget = spinBudget.getSelectedItem().toString();
         }
         if (spinType.getSelectedItem()!=null) {
             typeVoyage = spinType.getSelectedItem().toString();
         }
 
-        //essayer davoir la valeur exacte de date
-        try {
-            dateVoyage = formatter.parse(eTDate.getText().toString());
-        }
-        catch(java.text.ParseException e){
-            Log.i("Date", e.toString());
-        }
 
         //mettre les valeurs des spinner
         Resources ressources = getResources();
@@ -108,6 +105,66 @@ public class AccueilActivity extends AppCompatActivity {
         spinDestination.setAdapter(adapteurSpin1);
         spinType.setAdapter(adapteurSpin2);
         spinBudget.setAdapter(adapteurSpin3);
+
+        //Mettre des listerners pour chaque spinner afin de filtrer
+        spinDestination.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                destination = parent.getItemAtPosition(position).toString();
+
+                viewModel.filtrer(destination, typeVoyage,eTDate.getText().toString(),budget);
+                Log.d("Filtres", "destination=" + destination + " type=" + typeVoyage + " date=" + eTDate.getText().toString() + " budget=" + budget);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        spinType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                typeVoyage = parent.getItemAtPosition(position).toString();
+                viewModel.filtrer(destination, typeVoyage,eTDate.getText().toString(),budget);
+                Log.d("Filtres", "destination=" + destination + " type=" + typeVoyage + " date=" + eTDate.getText().toString() + " budget=" + budget);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        spinBudget.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                budget = parent.getItemAtPosition(position).toString();
+                viewModel.filtrer(destination, typeVoyage,eTDate.getText().toString(),budget);
+                Log.d("Filtres", "destination=" + destination + " type=" + typeVoyage + " date=" + eTDate.getText().toString() + " budget=" + budget);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //Date
+        eTDate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                dateVoyage = s.toString();
+                viewModel.filtrer(destination,typeVoyage,dateVoyage,budget);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
     }
 
     @Override

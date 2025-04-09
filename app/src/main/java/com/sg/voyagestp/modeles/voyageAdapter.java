@@ -28,8 +28,6 @@ public class voyageAdapter extends ArrayAdapter<Voyage>{
         private Context contexte;
         private int viewResourceId;
         private Resources ressources;
-        //private List<Voyage> listeVoyages;
-
 
 
 
@@ -42,22 +40,10 @@ public class voyageAdapter extends ArrayAdapter<Voyage>{
 
         }
 
-    /*public void updateData(List<Voyage> newVoyages) {
-            if (this.listeVoyages!=null) {
-                this.listeVoyages.clear();
-            }
-            else{
-                this.listeVoyages= new ArrayList<>();
-            }
-        if(newVoyages != null){
-            this.listeVoyages.addAll(newVoyages);
-        }
-        notifyDataSetChanged();
-    }*/
     public void updateData(List<Voyage> newVoyages) {
-        clear();  // Efface l'ancienne liste
+        clear();
         if (newVoyages != null) {
-            addAll(newVoyages); // Ajoute à la liste interne de ArrayAdapter
+            addAll(newVoyages);
         }
         notifyDataSetChanged();
     }
@@ -88,10 +74,6 @@ public class voyageAdapter extends ArrayAdapter<Voyage>{
             }
             return view;
         }
-/*
-        @Override
-        public int getCount() {
-            return super.getCount();
-        }*/
+
 
 }
