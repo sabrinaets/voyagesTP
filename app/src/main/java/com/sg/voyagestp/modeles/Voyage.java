@@ -1,7 +1,9 @@
 package com.sg.voyagestp.modeles;
 
-public class Voyage {
-    private int id;
+import java.io.Serializable;
+
+public class Voyage implements Serializable {
+    private String id;
     private String nom_voyage;
 
     private String description;
@@ -14,6 +16,14 @@ public class Voyage {
     private String type_de_voyage;
     private String activites_incluses;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public Voyage(String activites_incluses, String type_de_voyage, Trip[] trips, int duree_jours, String destination, double prix, String nom_voyage, String description, String image_url) {
         this.activites_incluses = activites_incluses;
         this.type_de_voyage = type_de_voyage;
@@ -25,6 +35,7 @@ public class Voyage {
         this.description = description;
         this.image_url = image_url;
     }
+    public Voyage(){}
 
     public String getActivites_incluses() {
         return activites_incluses;

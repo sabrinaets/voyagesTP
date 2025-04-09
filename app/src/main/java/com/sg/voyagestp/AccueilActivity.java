@@ -1,24 +1,36 @@
 package com.sg.voyagestp;
 
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.sg.voyagestp.modeles.Voyage;
+import com.sg.voyagestp.modeles.voyageAdapter;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class AccueilActivity extends AppCompatActivity {
 
+    ListView listeVoyages;
+
+    voyageAdapter adapteur;
+    voyageViewModel viewModel;
     Spinner spinDestination;
     Spinner spinBudget;
     Spinner spinType;
@@ -47,9 +59,33 @@ public class AccueilActivity extends AppCompatActivity {
         spinType= findViewById(R.id.spinTypeVoyage);
         eTDate = findViewById(R.id.eTDate);
 
-        destination = spinDestination.getSelectedItem().toString();
-        budget =Double.parseDouble(spinBudget.getSelectedItem().toString());
-        typeVoyage =spinType.getSelectedItem().toString();
+
+
+        //Liste
+        listeVoyages = findViewById(R.id.lvVoyages);
+        adapteur = new voyageAdapter(this, R.layout.voyage_layout);
+        listeVoyages.setAdapter(adapteur);
+
+        //viewModel
+        viewModel = new ViewModelProvider(this).get(voyageViewModel.class);
+        viewModel.getVoyages().observe(this, voyages -> {
+            adapteur.updateData(voyages);
+            Toast.makeText(AccueilActivity.this, voyages.size() + " Voyages", Toast.LENGTH_SHORT).show();
+        });
+        // Observer les éventuelles erreurs
+        viewModel.getError().observe(this, errorMessage ->
+                Toast.makeText(AccueilActivity.this, errorMessage, Toast.LENGTH_SHORT).show()
+        );
+
+        if (spinDestination.getSelectedItem()!=null){
+            destination = spinDestination.getSelectedItem().toString();
+        }
+        if (spinBudget.getSelectedItem()!=null) {
+            budget = Double.parseDouble(spinBudget.getSelectedItem().toString());
+        }
+        if (spinType.getSelectedItem()!=null) {
+            typeVoyage = spinType.getSelectedItem().toString();
+        }
 
         //essayer davoir la valeur exacte de date
         try {
@@ -73,4 +109,21 @@ public class AccueilActivity extends AppCompatActivity {
         spinType.setAdapter(adapteurSpin2);
         spinBudget.setAdapter(adapteurSpin3);
     }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        int r = checkSelfPermission("android.permission.INTERNET");
+        if (r == PackageManager.PERMISSION_GRANTED) {
+            if (viewModel.getAllVoyages().isEmpty()){
+                viewModel.init(AccueilActivity.this);
+            }
+            else {
+                List<Voyage> liste = viewModel.getAllVoyages();
+
+            }
+        } else {
+            Toast.makeText(this, "Accès Internet non permis!", Toast.LENGTH_LONG).show();
+        }
+}
 }

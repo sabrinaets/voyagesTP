@@ -39,6 +39,8 @@ dependencies {
     implementation(libs.constraintlayout)
     testImplementation(libs.junit)
     implementation(libs.okhttp)
+    implementation(libs.coil)
+    implementation(libs.picasso)
     implementation (libs.jackson.databind)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
