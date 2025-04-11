@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -32,6 +33,7 @@ import java.util.List;
 public class AccueilActivity extends AppCompatActivity {
 
     ListView listeVoyages;
+    Button buttonHistorique;
 
     voyageAdapter adapteur;
     voyageViewModel viewModel;
@@ -45,6 +47,7 @@ public class AccueilActivity extends AppCompatActivity {
     String typeVoyage="";
 
     String dateVoyage="";
+    String idUtilisateur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +65,20 @@ public class AccueilActivity extends AppCompatActivity {
         spinBudget = findViewById(R.id.spinBudget);
         spinType= findViewById(R.id.spinTypeVoyage);
         eTDate = findViewById(R.id.eTDate);
+        buttonHistorique = findViewById(R.id.buttonHistorique);
+        idUtilisateur = getIntent().getStringExtra("idUtilisateur");
+        if (idUtilisateur != null) {
+            Log.d("DEBUG", "ID utilisateur connecté : " + idUtilisateur);
+        }
 
+        buttonHistorique.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent historique = new Intent (AccueilActivity.this,HistoriqueActivity.class);
+                historique.putExtra("idUtilisateur", idUtilisateur);
+                startActivity(historique);
+            }
+        });
 
 
         //Liste
@@ -120,7 +136,6 @@ public class AccueilActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
-
         spinType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -172,6 +187,7 @@ public class AccueilActivity extends AppCompatActivity {
             if (voyage!=null){
                 Intent iVoirVoyage = new Intent(AccueilActivity.this,detailsVoyage.class);
                 iVoirVoyage.putExtra("leVoyage",voyage);
+                iVoirVoyage.putExtra("idUtilisateur",idUtilisateur);
                 startActivity(iVoirVoyage);
             }
         });

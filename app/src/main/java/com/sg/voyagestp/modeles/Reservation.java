@@ -7,15 +7,17 @@ public class Reservation implements Serializable {
     private String idClient;
     private String idVoyage;
     private Date date;
+    private String destination;
     private int nombre_personne;
     private double montant;
     private int statut;
 
-    public Reservation(String id, String idClient, String idVoyage, Date date, int nombre_personne, double montant, int statut) {
+    public Reservation(String id, String idClient, String idVoyage, Date date,String destination, int nombre_personne, double montant, int statut) {
         this.id = id;
         this.idClient = idClient;
         this.idVoyage = idVoyage;
         this.date = date;
+        this.destination = destination;
         this.nombre_personne = nombre_personne;
         this.montant = montant;
         this.statut = statut;
@@ -36,6 +38,9 @@ public class Reservation implements Serializable {
 
     public Date getDate() {
         return date;
+    }
+    public String getDestination(){
+        return destination;
     }
 
     public int getNombre_personne() {
@@ -65,6 +70,10 @@ public class Reservation implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
     public void setNombre_personne(int nombre_personne) {

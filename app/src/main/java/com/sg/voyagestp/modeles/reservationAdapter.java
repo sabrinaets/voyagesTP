@@ -16,20 +16,22 @@ import com.sg.voyagestp.R;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class reservationAdapter extends ArrayAdapter<Trip> {
+public class reservationAdapter extends ArrayAdapter<Reservation> {
     private Context contexte;
     private int viewResourceId;
     private Resources ressources;
-    private final List<Trip> trips;
+    private final List<Reservation> reservations;
+    TextView tvDestination;
     TextView tvDate;
-    TextView tvPlaces;
+    TextView tvMontant;
+    TextView tvStatut;
 
-    public reservationAdapter(@NonNull Context context, int resource, List<Trip>liste) {
+    public reservationAdapter(@NonNull Context context, int resource, List<Reservation>liste) {
         super(context, resource,liste);
         this.contexte = context;
         this.viewResourceId = resource;
         this.ressources = contexte.getResources();
-        this.trips = liste;
+        this.reservations = liste;
     }
     @NonNull
     @Override
@@ -41,16 +43,20 @@ public class reservationAdapter extends ArrayAdapter<Trip> {
             view = layoutInflater.inflate(this.viewResourceId, parent, false);
         }
 
-        Trip trip = trips.get(position);
-        if (trip!=null){
-            tvDate = view.findViewById(R.id.tvDate);
-            tvPlaces=view.findViewById(R.id.tvNbPlaces);
+        Reservation reservation = reservations.get(position);
+        if (reservation!=null){
+            tvDestination = view.findViewById(R.id.tvDestinationRsv);
+            tvDate = view.findViewById(R.id.tvDateRsv);
+            tvMontant=view.findViewById(R.id.tvMontantRsv);
+            tvStatut=view.findViewById(R.id.tvStatutRsv);
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String formattedDate = sdf.format(trip.getDate());  // Format de la date
+            String formattedDate = sdf.format(reservation.getDate());  // Format de la date
 
+            tvDestination.setText("Destination: "+reservation.getDestination());
             tvDate.setText("Date: "+formattedDate);
-            tvPlaces.setText("Nombre de places: "+trip.getNb_places_disponibles());
+            tvMontant.setText("Montant payé: "+reservation.getMontant());
+            tvStatut.setText("Statut: "+ reservation.getStatut());
         }
         return view;
 

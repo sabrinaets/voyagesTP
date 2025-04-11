@@ -1,5 +1,6 @@
 package com.sg.voyagestp;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,6 +47,8 @@ public class detailsVoyage extends AppCompatActivity {
     tripAdapter adapteur;
     Button btnRetour;
 
+    String idUtilisateur;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +60,7 @@ public class detailsVoyage extends AppCompatActivity {
             return insets;
         });
 
+        idUtilisateur = getIntent().getStringExtra("idUtilisateur");
         tvNom = findViewById(R.id.tvNom);
         img = findViewById(R.id.tvImg);
 
@@ -100,7 +104,32 @@ public class detailsVoyage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent retour = new Intent (detailsVoyage.this,AccueilActivity.class);
+                retour.putExtra("idUtilisateur",idUtilisateur);
                 startActivity(retour);
+            }
+        });
+
+        //Détails voyage
+        trips.setOnItemClickListener((adapterView, view, position, id) -> {
+            Trip trip = adapteur.getItem(position);
+            if (trip!=null){
+                if(trip.getNb_places_disponibles()>0) {
+                    Intent iReserverTrip = new Intent(detailsVoyage.this, ReserverActivity.class);
+                    iReserverTrip.putExtra("leVoyage", voyage);
+                    iReserverTrip.putExtra("leTrip", trip);
+                    iReserverTrip.putExtra("idUtilisateur",idUtilisateur);
+                    startActivity(iReserverTrip);
+                }
+                else {
+                    new AlertDialog.Builder(this)
+                            .setTitle("Alert")
+                            .setMessage("Il n'y a aucune place disponible pour ce voyage")
+                            .setNegativeButton("Fermer", (dialog, which) -> {
+                                // Just dismiss the dialog
+                                dialog.dismiss();
+                            })
+                            .show();
+                }
             }
         });
     }

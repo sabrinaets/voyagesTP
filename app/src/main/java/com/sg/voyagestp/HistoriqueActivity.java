@@ -33,39 +33,19 @@ import java.util.List;
 public class HistoriqueActivity extends AppCompatActivity {
 
     ListView listeReservation;
-
     reservationAdapter adapteur;
     voyageViewModel viewModel;
-    Spinner spinDestination;
-    Spinner spinBudget;
-    Spinner spinType;
-    EditText eTDate;
-
-    String destination = "";
-    String budget="";
-    String typeVoyage="";
-
-    String dateVoyage="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.accueil_layout);
+        setContentView(R.layout.historique_layout);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        spinDestination = findViewById(R.id.spinDestination);
-        spinBudget = findViewById(R.id.spinBudget);
-        spinType= findViewById(R.id.spinTypeVoyage);
-        eTDate = findViewById(R.id.eTDate);
-
-
-
 
 }
 }

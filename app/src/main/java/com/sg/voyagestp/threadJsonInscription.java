@@ -20,7 +20,7 @@ import okhttp3.ResponseBody;
 
 public class threadJsonInscription extends Thread {
     private static final String TAG = "inscriptionThread";
-    final String URL_POINT_ENTREE = "http://192.168.0.101:3000";
+    final String URL_POINT_ENTREE = "http://10.0.2.2:3000";//"http://192.168.0.101:3000";
     private Client client;
 
     Context contexte;

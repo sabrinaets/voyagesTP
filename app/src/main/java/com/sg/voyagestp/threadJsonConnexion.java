@@ -18,7 +18,7 @@ import okhttp3.ResponseBody;
 public class threadJsonConnexion extends Thread {
 
     private static final String TAG = "connexionThread";
-    final String URL_POINT_ENTREE = "http://192.168.0.101:3000";
+    final String URL_POINT_ENTREE = "http://10.0.2.2:3000";//"http://192.168.0.101:3000";
     private String email;
     private String password;
 
@@ -34,13 +34,14 @@ public class threadJsonConnexion extends Thread {
     @Override
     public void run() {
 
-        boolean utilisateurTrouve = verifierUtilisateur(this.email,this.password);
+        String utilisateurTrouve = verifierUtilisateur(this.email,this.password);
         if (this.contexte instanceof Activity){
             ((Activity) this.contexte).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (utilisateurTrouve){
+                    if (utilisateurTrouve != null){
                         Intent intent = new Intent(contexte, AccueilActivity.class);
+                        intent.putExtra("idUtilisateur", utilisateurTrouve);
                         contexte.startActivity(intent);
                     }
                     else{
@@ -52,7 +53,7 @@ public class threadJsonConnexion extends Thread {
 
     }
 
-    public boolean verifierUtilisateur(String email, String mdp) {
+    public String verifierUtilisateur(String email, String mdp) {
         OkHttpClient client = new OkHttpClient();
         Request requete = new Request.Builder().url(URL_POINT_ENTREE + "/clients").build();
 
@@ -69,7 +70,7 @@ public class threadJsonConnexion extends Thread {
             boolean trouve = false;
             for (Client c : clients) {
                 if (c.getEmail().equals(email) && c.getPassword().equals(mdp)) {
-                    return true;
+                    return c.getId();
                 }
             }
         } catch (Exception e) {
@@ -77,6 +78,6 @@ public class threadJsonConnexion extends Thread {
             throw new RuntimeException();
 
         }
-        return false;
+        return null;
     }
 }

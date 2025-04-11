@@ -9,7 +9,17 @@
     tools:context=".ReserverActivity">
 
 
+    <TextView
+        android:id="@+id/tvNomVoyageRsv"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:text="Nom du voyage" />
 
+    <TextView
+        android:id="@+id/tvDateTripRsv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date du voyage" />
 
     <EditText
         android:id="@+id/eTNbPersonne"
@@ -33,5 +43,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Reserver" />
+
+    <Button
+        android:id="@+id/buttonRetourDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Retour" />
 
 </LinearLayout>
