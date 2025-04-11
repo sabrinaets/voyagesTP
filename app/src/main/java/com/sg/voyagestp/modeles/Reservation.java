@@ -12,6 +12,18 @@ public class Reservation implements Serializable {
     private double montant;
     private int statut;
 
+    public Reservation(){
+        this.id = "";
+        this.idClient = "";
+        this.idVoyage = "";
+        this.date = null;
+        this.destination = "";
+        this.nombre_personne = -1;
+        this.montant = -1;
+        this.statut = 1;
+
+    }
+
     public Reservation(String id, String idClient, String idVoyage, Date date,String destination, int nombre_personne, double montant, int statut) {
         this.id = id;
         this.idClient = idClient;

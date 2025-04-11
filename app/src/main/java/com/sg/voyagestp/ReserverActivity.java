@@ -69,10 +69,31 @@ public class ReserverActivity extends AppCompatActivity {
         retour = findViewById(R.id.buttonRetourDetail);
 
 
+        montant.setText("Prix: 0.0$");
         nomVoyage.setText(voyage.getNom_voyage());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = sdf.format(trip.getDate());  // Format de la date
         dateVoyage.setText("Date: "+formattedDate);
+
+
+        nombrePersonne.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try {
+                    int nbPersonnes = Integer.parseInt(s.toString());
+                    double total = voyage.getPrix() * nbPersonnes;
+                    montant.setText("Prix: " + total + "$");
+                } catch (NumberFormatException e) {
+                    montant.setText("Prix: 0.0$");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
 
         retour.setOnClickListener(new View.OnClickListener() {
             @Override

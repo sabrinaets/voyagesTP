@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -22,6 +23,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.sg.voyagestp.modeles.Reservation;
+import com.sg.voyagestp.modeles.Trip;
 import com.sg.voyagestp.modeles.Voyage;
 import com.sg.voyagestp.modeles.reservationAdapter;
 import com.sg.voyagestp.modeles.voyageAdapter;
@@ -32,9 +35,11 @@ import java.util.List;
 
 public class HistoriqueActivity extends AppCompatActivity {
 
+    String idUtilisateur;
     ListView listeReservation;
+    List<Reservation> listeRsv;
     reservationAdapter adapteur;
-    voyageViewModel viewModel;
+    Button bouttonRetour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +52,24 @@ public class HistoriqueActivity extends AppCompatActivity {
             return insets;
         });
 
+        idUtilisateur = getIntent().getStringExtra("idUtilisateur");
+        bouttonRetour = findViewById(R.id.buttonRetourHistorique);
+        listeReservation = findViewById(R.id.lvReservation);
+
+        //initialisation de la listeRsv en grace a methode DAO
+        //listeRsv = ...
+
+
+        //adapteur = new reservationAdapter(this, R.layout.reservation_layout,listeRsv);
+
+
+        bouttonRetour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent retour = new Intent (HistoriqueActivity.this,AccueilActivity.class);
+                retour.putExtra("idUtilisateur",idUtilisateur);
+                startActivity(retour);
+            }
+        });
 }
 }

@@ -56,7 +56,8 @@ public class reservationAdapter extends ArrayAdapter<Reservation> {
             tvDestination.setText("Destination: "+reservation.getDestination());
             tvDate.setText("Date: "+formattedDate);
             tvMontant.setText("Montant payé: "+reservation.getMontant());
-            tvStatut.setText("Statut: "+ reservation.getStatut());
+            String statutText = reservation.getStatut() == 1 ? "Confirmée" : "Annulée";
+            tvStatut.setText("Statut: " + statutText);
         }
         return view;
 
