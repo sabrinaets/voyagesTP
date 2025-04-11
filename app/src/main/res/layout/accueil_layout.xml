@@ -9,12 +9,24 @@
     tools:context=".AccueilActivity">
 
     <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="accueil_layout.xml" />
+
+    <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:layout_margin="10dp"
         android:text="Quel type de voyage recherchez-vous?" />
+
+    <Button
+        android:id="@+id/buttonHistorique"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Historique de réservation" />
 
     <Spinner
         android:id="@+id/spinDestination"
@@ -40,9 +52,9 @@
         android:id="@+id/eTDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:ems="10"
         android:hint="Date"
-        android:layout_margin="10dp"
         android:inputType="date" />
 
     <ListView
