@@ -15,6 +15,7 @@ import com.sg.voyagestp.R;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class reservationAdapter extends ArrayAdapter<Reservation> {
     private Context contexte;
@@ -50,7 +51,7 @@ public class reservationAdapter extends ArrayAdapter<Reservation> {
             tvMontant=view.findViewById(R.id.tvMontantRsv);
             tvStatut=view.findViewById(R.id.tvStatutRsv);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             String formattedDate = sdf.format(reservation.getDate());  // Format de la date
 
             tvDestination.setText("Destination: "+reservation.getDestination());

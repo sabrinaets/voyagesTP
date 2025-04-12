@@ -24,6 +24,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.sg.voyagestp.modeles.Reservation;
+import com.sg.voyagestp.modeles.ReservationDAO;
 import com.sg.voyagestp.modeles.Trip;
 import com.sg.voyagestp.modeles.Voyage;
 import com.sg.voyagestp.modeles.reservationAdapter;
@@ -56,11 +57,13 @@ public class HistoriqueActivity extends AppCompatActivity {
         bouttonRetour = findViewById(R.id.buttonRetourHistorique);
         listeReservation = findViewById(R.id.lvReservation);
 
-        //initialisation de la listeRsv en grace a methode DAO
-        //listeRsv = ...
+        ReservationDAO dao = new ReservationDAO(this);
+        dao.open();
+        listeRsv = dao.getReservationsParClient(idUtilisateur);
+        dao.close();
 
-
-        //adapteur = new reservationAdapter(this, R.layout.reservation_layout,listeRsv);
+        adapteur = new reservationAdapter(this, R.layout.reservation_layout, listeRsv);
+        listeReservation.setAdapter(adapteur);
 
 
         bouttonRetour.setOnClickListener(new View.OnClickListener() {

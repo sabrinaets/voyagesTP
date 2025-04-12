@@ -27,8 +27,8 @@ public class ReservationDAO {
 
     public long ajouterReservation(Reservation r) {
         ContentValues values = new ContentValues();
-        values.put("id", r.getId());
         values.put("idClient", r.getIdClient());
+        values.put("destination",r.getDestination());
         values.put("idVoyage", r.getIdVoyage());
         values.put("date", r.getDate().getTime());
         values.put("nombre_personne", r.getNombre_personne());

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ReservationDB extends SQLiteOpenHelper {
         private static final String DB_NAME = "reservations.db";
-        private static final int DB_VERSION = 1;
+        private static final int DB_VERSION = 5;
 
         public ReservationDB(Context context) {
             super(context, DB_NAME, null, DB_VERSION);
@@ -20,8 +20,8 @@ public class ReservationDB extends SQLiteOpenHelper {
                     "idClient TEXT," +
                     "destination TEXT," +
                     "idVoyage TEXT," +
-                    "date TEXT," +
-                    "nombrePersonne INTEGER," +
+                    "date INTEGER," +
+                    "nombre_personne INTEGER," +
                     "montant REAL," +
                     "statut INTEGER)");
         }

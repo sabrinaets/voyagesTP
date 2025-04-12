@@ -15,6 +15,7 @@ import com.sg.voyagestp.R;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class tripAdapter extends ArrayAdapter<Trip> {
     private Context contexte;
@@ -46,7 +47,7 @@ public class tripAdapter extends ArrayAdapter<Trip> {
             tvDate = view.findViewById(R.id.tvDate);
             tvPlaces=view.findViewById(R.id.tvNbPlaces);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             String formattedDate = sdf.format(trip.getDate());  // Format de la date
 
             tvDate.setText("Date: "+formattedDate);

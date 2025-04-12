@@ -29,6 +29,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AccueilActivity extends AppCompatActivity {
 
@@ -60,7 +61,7 @@ public class AccueilActivity extends AppCompatActivity {
             return insets;
         });
 
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         spinDestination = findViewById(R.id.spinDestination);
         spinBudget = findViewById(R.id.spinBudget);
         spinType= findViewById(R.id.spinTypeVoyage);

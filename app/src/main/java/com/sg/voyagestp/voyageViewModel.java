@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class voyageViewModel extends ViewModel {
@@ -68,7 +69,7 @@ public class voyageViewModel extends ViewModel {
                 correspond = false;
             }
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  // Format de la date : "2025-04-10"
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());  // Format de la date : "2025-04-10"
             sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
             // Vérifier la date dans les trips
 

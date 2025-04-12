@@ -25,6 +25,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.sg.voyagestp.modeles.Client;
+import com.sg.voyagestp.modeles.Reservation;
+import com.sg.voyagestp.modeles.ReservationDAO;
 import com.sg.voyagestp.modeles.Trip;
 import com.sg.voyagestp.modeles.Voyage;
 import com.sg.voyagestp.modeles.voyageAdapter;
@@ -32,6 +34,7 @@ import com.sg.voyagestp.modeles.voyageAdapter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class ReserverActivity extends AppCompatActivity {
 
@@ -71,7 +74,7 @@ public class ReserverActivity extends AppCompatActivity {
 
         montant.setText("Prix: 0.0$");
         nomVoyage.setText(voyage.getNom_voyage());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String formattedDate = sdf.format(trip.getDate());  // Format de la date
         dateVoyage.setText("Date: "+formattedDate);
 
@@ -102,6 +105,58 @@ public class ReserverActivity extends AppCompatActivity {
                 retour.putExtra("idUtilisateur",idUtilisateur);
                 retour.putExtra("leVoyage",voyage);
                 startActivity(retour);
+            }
+        });
+
+        reserver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nbStr = nombrePersonne.getText().toString().trim();
+                if (nbStr.isEmpty()) {
+                    Toast.makeText(ReserverActivity.this, "Veuillez entrer un nombre de personnes", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                int nbPersonnes = Integer.parseInt(nbStr);
+
+                if (nbPersonnes <= 0) {
+                    Toast.makeText(ReserverActivity.this, "Le nombre de personnes doit être supérieur à zéro", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (nbPersonnes > trip.getNb_places_disponibles()) {
+                    Toast.makeText(ReserverActivity.this, "Nombre de personnes dépasse les places disponibles (" + trip.getNb_places_disponibles() + ")", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // ✅ ICI tu peux créer et enregistrer la réservation
+                Reservation reservation = new Reservation();
+                reservation.setIdClient(idUtilisateur);
+                reservation.setIdVoyage(voyage.getId());
+                reservation.setDestination(voyage.getDestination());
+                reservation.setDate(trip.getDate());
+                reservation.setNombre_personne(nbPersonnes);
+                reservation.setMontant(voyage.getPrix() * nbPersonnes);
+                reservation.setStatut(1); // 1 = confirmée
+
+                ReservationDAO dao = new ReservationDAO(ReserverActivity.this);
+                dao.open();
+                dao.ajouterReservation(reservation);
+                dao.close();
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String dateFormatted = sdf.format(trip.getDate());
+                Log.i("Test la date", dateFormatted);
+
+                new threadJsonMajPlaces(ReserverActivity.this,Integer.parseInt(voyage.getId()), dateFormatted, nbPersonnes).start();
+
+
+                Toast.makeText(ReserverActivity.this, "Réservation confirmée 🎉", Toast.LENGTH_SHORT).show();
+
+                // Optionnel : retour à l'accueil ou historique
+                Intent intent = new Intent(ReserverActivity.this, AccueilActivity.class);
+                intent.putExtra("idUtilisateur", idUtilisateur);
+                startActivity(intent);
             }
         });
 }
