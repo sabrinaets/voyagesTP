@@ -9,12 +9,6 @@
     tools:context=".HistoriqueActivity">
 
     <TextView
-        android:id="@+id/tvTitreHistorique"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="historique_layout.xml" />
-
-    <TextView
         android:id="@+id/tvVosRsv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,6 +20,8 @@
         android:id="@+id/buttonRetourHistorique"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/boutons"
+        app:cornerRadius="0dp"
         android:text="Retour" />
 
 

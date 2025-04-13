@@ -12,8 +12,10 @@
     <TextView
         android:id="@+id/tvNomVoyageRsv"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:text="Nom du voyage" />
+        android:layout_height="wrap_content"
+        android:text="Nom du voyage"
+        android:textSize="35sp"
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/tvDateTripRsv"
@@ -42,12 +44,17 @@
         android:id="@+id/ConfirmerRsv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/boutons"
+        android:layout_marginTop="30dp"
+        app:cornerRadius="0dp"
         android:text="Reserver" />
 
     <Button
         android:id="@+id/buttonRetourDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/boutons"
+        app:cornerRadius="0dp"
         android:text="Retour" />
 
 </LinearLayout>

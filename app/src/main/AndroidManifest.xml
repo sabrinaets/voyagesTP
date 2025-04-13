@@ -19,6 +19,12 @@
             android:name=".detailsVoyage"
             android:exported="false" />
         <activity
+            android:name=".HistoriqueActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReserverActivity"
+            android:exported="false" />
+        <activity
             android:name=".Inscription"
             android:exported="false" />
         <activity

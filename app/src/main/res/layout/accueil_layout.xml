@@ -9,12 +9,6 @@
     tools:context=".AccueilActivity">
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="accueil_layout.xml" />
-
-    <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,6 +20,8 @@
         android:id="@+id/buttonHistorique"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/boutons"
+        app:cornerRadius="0dp"
         android:text="Historique de réservation" />
 
     <Spinner
