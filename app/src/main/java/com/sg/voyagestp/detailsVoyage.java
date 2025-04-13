@@ -125,7 +125,7 @@ public class detailsVoyage extends AppCompatActivity {
                             .setTitle("Alert")
                             .setMessage("Il n'y a aucune place disponible pour ce voyage")
                             .setNegativeButton("Fermer", (dialog, which) -> {
-                                // Just dismiss the dialog
+
                                 dialog.dismiss();
                             })
                             .show();

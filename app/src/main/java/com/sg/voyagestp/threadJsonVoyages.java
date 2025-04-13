@@ -18,7 +18,7 @@ import okhttp3.ResponseBody;
 
 public class threadJsonVoyages extends Thread{
     private static final String TAG = "voyagesThread";
-    final String URL_POINT_ENTREE = "http://10.0.2.2:3000";//"http://192.168.0.101:3000";
+    final String URL_POINT_ENTREE = "http://192.168.0.101:3000";//"http://10.0.2.2:3000";
     Context contexte;
     voyageViewModel viewModel;
 
