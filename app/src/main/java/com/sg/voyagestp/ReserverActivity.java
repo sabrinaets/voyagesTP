@@ -35,6 +35,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class ReserverActivity extends AppCompatActivity {
 
@@ -75,6 +76,7 @@ public class ReserverActivity extends AppCompatActivity {
         montant.setText("Prix: 0.0$");
         nomVoyage.setText(voyage.getNom_voyage());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         String formattedDate = sdf.format(trip.getDate());  // Format de la date
         dateVoyage.setText("Date: "+formattedDate);
 
@@ -129,7 +131,7 @@ public class ReserverActivity extends AppCompatActivity {
                     return;
                 }
 
-                // ✅ ICI tu peux créer et enregistrer la réservation
+
                 Reservation reservation = new Reservation();
                 reservation.setIdClient(idUtilisateur);
                 reservation.setIdVoyage(voyage.getId());
@@ -143,8 +145,10 @@ public class ReserverActivity extends AppCompatActivity {
                 dao.open();
                 dao.ajouterReservation(reservation);
                 dao.close();
+                Log.i("La destination de la reservation créé", reservation.getDestination());
 
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
                 String dateFormatted = sdf.format(trip.getDate());
                 Log.i("Test la date", dateFormatted);
 
@@ -153,7 +157,6 @@ public class ReserverActivity extends AppCompatActivity {
 
                 Toast.makeText(ReserverActivity.this, "Réservation confirmée 🎉", Toast.LENGTH_SHORT).show();
 
-                // Optionnel : retour à l'accueil ou historique
                 Intent intent = new Intent(ReserverActivity.this, AccueilActivity.class);
                 intent.putExtra("idUtilisateur", idUtilisateur);
                 startActivity(intent);

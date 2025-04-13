@@ -52,6 +52,7 @@ public class ReservationDAO {
                 r.setId(cursor.getString(cursor.getColumnIndexOrThrow("id")));
                 r.setIdClient(cursor.getString(cursor.getColumnIndexOrThrow("idClient")));
                 r.setIdVoyage(cursor.getString(cursor.getColumnIndexOrThrow("idVoyage")));
+                r.setDestination(cursor.getString(cursor.getColumnIndexOrThrow("destination")));
                 r.setDate(new Date(cursor.getLong(cursor.getColumnIndexOrThrow("date"))));
                 r.setNombre_personne(cursor.getInt(cursor.getColumnIndexOrThrow("nombre_personne")));
                 r.setMontant(cursor.getDouble(cursor.getColumnIndexOrThrow("montant")));
@@ -65,12 +66,12 @@ public class ReservationDAO {
         return liste;
     }
 
-    public int annulerReservation(String idReservation) {
+    public void updateStatut(String idReservation, int nouveauStatut) {
         ContentValues values = new ContentValues();
-        values.put("statut", 0); // 0 = annulée
-
-        return db.update("reservations", values, "id = ?", new String[]{idReservation});
+        values.put("statut", nouveauStatut);
+        db.update("reservations", values, "id = ?", new String[]{idReservation});
     }
+
 
     public int supprimerReservation(String idReservation) {
         return db.delete("reservations", "id = ?", new String[]{idReservation});
