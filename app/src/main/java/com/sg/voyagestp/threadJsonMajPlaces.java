@@ -15,7 +15,7 @@ import okhttp3.Response;
 
 public class threadJsonMajPlaces extends Thread {
     private static final String TAG = "MajPlacesThread";
-    final String URL_POINT_ENTREE = "http://192.168.0.101:3000";//"http://10.0.2.2:3000/voyages";
+    final String URL_POINT_ENTREE = "http://10.0.2.2:3000/voyages";//"http://192.168.0.101:3000";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private int idVoyage;
     private String dateTrip; // Format "yyyy-MM-dd"
